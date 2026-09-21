@@ -133,7 +133,7 @@ function DiaryPageInner() {
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <SearchBar placeholder="제목 검색" onSearch={v => { setQ(v); setPage(1); }} />
-          {isAdmin && <button className="btn btn-dark" onClick={() => router.push('/diary/write')}>＋ WRITE</button>}
+          {user && <button className="btn btn-dark" onClick={() => router.push('/diary/write')}>＋ WRITE</button>}
         </div>
       </div>
 

@@ -79,7 +79,7 @@ function DiaryPageInner() {
   const query = q.trim().toLowerCase();
   const monthKey = `${view.y}-${String(view.m + 1).padStart(2, '0')}`;
   const canManagePost = (p: DiaryPost) =>
-  isAdmin || (!!user && p.authorId === user.uid);
+  isAdmin || (!!user && p.authorId === user.id);
   const visible = posts
     .filter(canSee)
     .filter(p => fMood === 'all' || p.moodId === fMood)

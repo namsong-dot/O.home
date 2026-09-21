@@ -2,7 +2,6 @@
 // 일기 쓰기 (4.14) — 페이지형
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useSectionParam } from '@/lib/sectionStore';
 import { useAuth } from '@/lib/auth';
 import { useLocalList, newId } from '@/lib/postStore';
 import { DiaryPost, DIARY_SEED, Mood, MOOD_SEED } from '@/lib/diaryStore';

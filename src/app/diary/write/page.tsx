@@ -2,6 +2,7 @@
 // 일기 쓰기 (4.14) — 페이지형
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { useSectionParam } from '@/lib/sectionStore';
 import { useAuth } from '@/lib/auth';
 import { useLocalList, newId } from '@/lib/postStore';
 import { DiaryPost, DIARY_SEED, Mood, MOOD_SEED } from '@/lib/diaryStore';
@@ -11,6 +12,8 @@ import { PageTitle, EditableDesc } from '@/components/ui/PageText';
 
 export default function DiaryWritePage() {
   const router = useRouter();
+  const { user, isAdmin } = useAuth();
+  const sec = useSectionParam('diary');
   if (!user) {
   const toast = useToast();
   const [posts, setPosts] = useLocalList<DiaryPost>('ohome.diary.v1', DIARY_SEED);
@@ -30,7 +33,7 @@ export default function DiaryWritePage() {
       <DiaryForm initial={null} moods={moods}
         onCancel={() => router.push('/diary')}
         onSave={v => {
-          const p: DiaryPost = { id: newId(), authorId: user.id, ...v };
+          const p: DiaryPost = { id: newId(), secId: sec.id, authorId: user.id, ...v };
           setPosts([p, ...posts]);
           toast('일기가 등록되었습니다');
           router.push('/diary');

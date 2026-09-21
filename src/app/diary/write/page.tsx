@@ -11,12 +11,12 @@ import { PageTitle, EditableDesc } from '@/components/ui/PageText';
 
 export default function DiaryWritePage() {
   const router = useRouter();
-  const { user, isAdmin } = useAuth();
+  if (!user) {
   const toast = useToast();
   const [posts, setPosts] = useLocalList<DiaryPost>('ohome.diary.v1', DIARY_SEED);
   const [moods] = useLocalList<Mood>('ohome.moods.v1', MOOD_SEED);
 
-  if (!user) {
+  if (!isadmin) {
     return (
       <section className="page">
         <div className="page-head"><PageTitle>DIARY</PageTitle><p>일기는 관리자만 쓸 수 있습니다</p></div>

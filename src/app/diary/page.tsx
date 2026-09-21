@@ -78,7 +78,8 @@ function DiaryPageInner() {
 
   const query = q.trim().toLowerCase();
   const monthKey = `${view.y}-${String(view.m + 1).padStart(2, '0')}`;
-  const canSee = (p: DiaryPost) => isAdmin || (p.visibility === 'public' || (p.visibility === 'member' && !!user));
+  const canManagePost = (p: DiaryPost) =>
+  isAdmin || (!!user && p.authorId === user.uid);
   const visible = posts
     .filter(canSee)
     .filter(p => fMood === 'all' || p.moodId === fMood)
@@ -160,7 +161,7 @@ function DiaryPageInner() {
               <div className="dy-fold" aria-hidden={!opened}>
                 <div className="dy-fold-in">
                   <DiaryBody p={p} onOpen={(ids, idx) => setLb({ srcs: ids, idx })} />
-                  {isAdmin && (
+                  {canManagePost(p) && (
                     <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end', padding: '0 0 14px' }}>
                       <button className="btn btn-ghost" style={{ padding: '4px 11px', fontSize: 10.5 }}
                         onClick={() => router.push(`/diary/${p.id}/edit`)}>EDIT</button>

@@ -30,7 +30,7 @@ export default function DiaryWritePage() {
       <DiaryForm initial={null} moods={moods}
         onCancel={() => router.push('/diary')}
         onSave={v => {
-          const p: DiaryPost = { id: newId(), authorId: user.uid, ...v };
+          const p: DiaryPost = { id: newId(), authorId: user.id, ...v };
           setPosts([p, ...posts]);
           toast('일기가 등록되었습니다');
           router.push('/diary');
